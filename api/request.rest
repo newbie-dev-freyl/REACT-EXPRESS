@@ -1,15 +1,1 @@
 GET http://localhost:5000/api/users
-###
-POST http://localhost:5000/api/users
-Content-Type: application/json
-
-{
-    "companyID": "1",
-    "firstName": "fs",
-    "middleName": "",
-    "lastName": "palmes",
-    "role": "admin",
-    "email": "freyl@yahoo.net",
-    "password": "admins1@",
-    "password2": "admins1@G"
-}
