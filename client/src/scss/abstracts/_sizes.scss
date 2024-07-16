@@ -1,0 +1,43 @@
+$size-props: (
+    sizes: (
+        mobile: (
+            1: .25rem,
+            2: .5rem,
+            3: .75rem,
+            4: 1rem,
+        ),
+
+        tablet: (
+            1: .5rem,
+            2: .75rem,
+            3: 1rem,
+            4: 1.25rem,
+        )
+    ),
+
+    spacing: (
+        sm: var(--size-2),
+        default: var(--size-6),
+        large: var(--size-10),
+        auto: auto
+    ), 
+
+    border-radius: (
+        mobile: (
+            1:1px,
+            2:2px,
+            3:3px,
+            4:4px,
+            5:5px,
+        ),
+
+        tablet: (
+            1:3px,
+            2:4px,
+            3:5px,
+            4:6px,
+            5:7px,
+        ) 
+    )
+);
+

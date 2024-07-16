@@ -1,0 +1,8 @@
+@use 'breakpoints' as *;
+
+@mixin breakpoint($key) {
+    $screen-width: map-get($breakpoints, $key);
+    @media screen and (min-width: $screen-width) {
+        @content;
+    }
+}

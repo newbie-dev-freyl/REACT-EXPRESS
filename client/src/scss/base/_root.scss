@@ -1,0 +1,93 @@
+@use '../abstracts/' as *;
+:root {
+
+    @each $prop, $data in $font-props {
+        @if $prop == 'family' {
+            @each $prop2, $data2 in $data {
+                --ff-#{$prop2}: #{$data2};
+            }
+        }
+
+        @if $prop == 'weight' {
+            @each $prop2, $data2 in $data {
+                --fw-#{$prop2}: #{$data2};
+            }
+        }
+
+        @if $prop == 'size' {
+            @each $prop2, $data2 in $data {
+                @if $prop2 == 'mobile' {
+                    @each $prop3, $data3 in $data2 {
+                        --fs-#{$prop3}: #{$data3};
+                    }
+                }
+            }
+        }
+    }//TYPOGRAPHY
+
+    @each $prop, $data in $size-props {
+        @if $prop == 'sizes' {
+            @each $prop2, $data2 in $data {
+                @if $prop2 == 'mobile' {
+                    @each $prop3, $data3 in $data2 {
+                        --size-#{$prop3}: #{$data3};
+                    }
+                }
+            }
+        }//sizes
+
+        @if $prop == 'border-radius' {
+            @each $prop2, $data2 in $data {
+                @if $prop2 == 'mobile' {
+                    @each $prop3, $data3 in $data2 {
+                        --border-radius-#{$prop3}: #{$data3};
+                    }
+                }
+            }
+        }//border-radius
+
+        @if $prop == 'spacing' {
+            @each $prop2, $data2 in $data {
+                --spacing-#{$prop2}: #{$data2};
+            }
+        }//spacing
+    }//SIZES
+
+    @include breakpoint(tablet) {
+        @each $prop, $data in $font-props {
+            @if $prop == 'size' {
+                @each $prop2, $data2 in $data {
+                    @if $prop2 == 'tablet' {
+                        @each $prop3, $data3 in $data2 {
+                            --fs-#{$prop3}: #{$data3};
+                        }
+                    }
+                }
+            }
+        }//TYPOGRAPHY
+
+        @each $prop, $data in $size-props {
+            @if $prop == 'sizes' {
+                @each $prop2, $data2 in $data {
+                    @if $prop2 == 'tablet' {
+                        @each $prop3, $data3 in $data2 {
+                            --size-#{$prop3}: #{$data3};
+                        }
+                    }
+                }
+            }//sizes
+
+            @if $prop == 'border-radius' {
+                @each $prop2, $data2 in $data {
+                    @if $prop2 == 'tablet' {
+                        @each $prop3, $data3 in $data2 {
+                            --border-radius-#{$prop3}: #{$data3};
+                        }
+                    }
+                }
+            }//border-radius
+        }//SIZES
+
+    }//BREAKPOINTS
+}//ROOT
+
