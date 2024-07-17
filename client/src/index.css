@@ -30,6 +30,11 @@
   --border-radius-3: 3px;
   --border-radius-4: 4px;
   --border-radius-5: 5px;
+  --bg: #242526;
+  --bg-accent: 484a4d;
+  --nav-size: 60px;
+  --border: 1px solid #474a4d;
+  --speed: 500ms;
 }
 @media screen and (min-width: 52.7em) {
   :root {
