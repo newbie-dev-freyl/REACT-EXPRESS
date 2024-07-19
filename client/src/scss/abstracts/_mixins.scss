@@ -6,3 +6,59 @@
         @content;
     }
 }
+
+@mixin flex($gap: 0) {
+    display: flex;
+    gap: $gap;
+}
+
+@mixin flex-center($gap: 0) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $gap;
+}
+
+@mixin flex-center-y($gap: 0) {
+    display: flex;
+    align-items: center;
+    gap: $gap;
+}
+
+@mixin grid-auto-columns($fr: calc(100% / 3)) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: $fr;
+}
+
+@mixin grid-center() {
+    display: grid;
+    place-content: center;
+}
+
+@mixin square($size){
+    width: $size;
+    height: $size;
+}
+
+@mixin round(){
+    border-radius: 50%;
+}
+
+@mixin round-0(){
+    border-radius: 0;
+}
+
+@mixin shadow-bottom($dept: 2px) {
+    box-shadow: 0 $dept 5px rgba(black, .3);
+}
+
+@mixin hide-element() {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@mixin show-element() {
+    opacity: 1;
+    pointer-events: auto;
+}

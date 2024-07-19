@@ -1,97 +1,241 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const HeaderNavigation = () => {
-  const [isToggled, setIsToggled] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 843.20);
   const navMenuRefs = useRef([]);
+  const navToggleLinkRefs = useRef([]);
   const navBackLinkRefs = useRef([]);
   const toggleRef = useRef(null);
 
+  const handleAnimationDisable = () => {
+    document.documentElement.setAttribute('disabled-animation', '');
+    setTimeout(() => {
+      document.documentElement.removeAttribute('disabled-animation');
+    }, 100);
+  };
+
   const handleResize = () => {
-    setIsDesktop(window.innerWidth > 843.20);
-    setIsToggled(false);
+    toggleRef.current.removeAttribute('toggle');
+    navMenuRefs.current.forEach((menu) => {
+      menu.removeAttribute('toggled');
+    });
   };
 
   const toggleMenu = () => {
-    setIsToggled(!isToggled);
-    navMenuRefs.current.forEach(menu => {
+    toggleRef.current.toggleAttribute('toggle');
+    navMenuRefs.current.forEach((menu) => {
       menu.removeAttribute('toggled');
     });
   };
 
   const handleLinkClick = (link, idx) => {
     if (link.hasAttribute('toggle-menu')) {
-      navMenuRefs.current[idx].toggleAttribute('toggled');
+      navToggleLinkRefs.current[idx].nextElementSibling.toggleAttribute(
+        'toggled'
+      );
     }
     if (link.hasAttribute('toggle-back')) {
-      navBackLinkRefs.current[idx].parentElement.parentElement.toggleAttribute('toggled');
+      navBackLinkRefs.current[idx].parentElement.parentElement.toggleAttribute(
+        'toggled'
+      );
     }
-    
   };
 
   useEffect(() => {
-    const handleAnimationDisable = () => {
-      document.documentElement.setAttribute('disabled-animation', '');
-      setTimeout(() => {
-        document.documentElement.removeAttribute('disabled-animation');
-      }, 100);
-    };
-
     window.addEventListener('resize', handleAnimationDisable);
     window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleAnimationDisable);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    handleResize();
   }, []);
 
   return (
-    <div>
-      <button 
-        className="header-toggle" 
-        onClick={toggleMenu} 
-        ref={toggleRef} 
-        toggled={isToggled ? 'true' : undefined}
-      >
-        Toggle Menu
-      </button>
-      <nav className="header-navmenu">
-        <li>
-            <a href={`javascript:void(0)`} onClick={(e) => handleLinkClick(e.target, 0)} toggle-menu="true">
-            Menu 1
-            </a>
-            <ul role="list" ref={(el) => (navMenuRefs.current[0] = el)}>
-                <li><a href={`javascript:void(0)`} ref={(el) => (navBackLinkRefs.current[0] = el)} onClick={(e) => handleLinkClick(e.target, 0)} toggle-back="true">Submenu 1</a></li>
-                <li><a href={`javascript:void(0)`}>Submenu 2</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href={`javascript:void(0)`} onClick={(e) => handleLinkClick(e.target, 1)} toggle-menu="true">
-            Menu 2
-            </a>
-            <ul role="list" ref={(el) => (navMenuRefs.current[1] = el)}>
-                <li><a href={`javascript:void(0)`} ref={(el) => (navBackLinkRefs.current[1] = el)} onClick={(e) => handleLinkClick(e.target, 1)} toggle-back="true">Submenu 3</a></li>
-                <li><a href={`javascript:void(0)`}>Submenu 4</a></li>
+    <header className="header">
+      <div className="shadow-bottom-sm">
+        <div className="wrapper flex align-center space-between">
+          <div className="header-inner | flex align-center space-between width-100">
+            <div className="header-brand">
+              {/* <img src="/assets/images/logo-1.png" alt="" className="logo" /> */}
+            </div>
+            <div className="header-toggle" ref={toggleRef} onClick={toggleMenu}>
+              <i className="bx bx-x"></i>
+              <i className="bx bx-menu"></i>
+            </div>
+            <nav className="header-nav | ff-nav text-capitalize text-nowrap">
+              <ul className="header-navmenu" role="list">
                 <li>
-                    <a href={`javascript:void(0)`} onClick={(e) => handleLinkClick(e.target, 3)} toggle-menu="true">Submenu 5</a>
-                    <ul role="list" ref={(el) => (navMenuRefs.current[3] = el)}>
-                        <li><a href={`javascript:void(0)`} ref={(el) => (navBackLinkRefs.current[3] = el)} onClick={(e) => handleLinkClick(e.target, 3)} toggle-back="true">Submenu 1</a></li>
-                        <li><a href={`javascript:void(0)`}>Submenu 2</a></li>
-                    </ul>
+                  <a href="#">home</a>
                 </li>
-            </ul>
-        </li>
-      </nav>
-    </div>
+
+                <li>
+                  <a
+                    href="#"
+                    ref={(el) => (navToggleLinkRefs.current[0] = el)}
+                    onClick={(e) => handleLinkClick(e.target, 0)}
+                    toggle-menu="true"
+                  >
+                    about us <i className="bx bx-chevron-down"></i>
+                  </a>
+                  <ul ref={(el) => (navMenuRefs.current[0] = el)} role="list">
+                    <li>
+                      <a
+                        href="#"
+                        ref={(el) => (navBackLinkRefs.current[0] = el)}
+                        onClick={(e) => handleLinkClick(e.target, 0)}
+                        toggle-back="true"
+                      >
+                        <i className="bx bx-chevron-left"></i>about us
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">key officials</a>
+                    </li>
+                    <li>
+                      <a href="#">who we are</a>
+                    </li>
+                    <li>
+                      <a href="#">mission & vision</a>
+                    </li>
+                    <li>
+                      <a href="#">organizational chart</a>
+                    </li>
+                    <li>
+                      <a href="#">quality policy</a>
+                    </li>
+                    <li>
+                      <a href="#">mandate</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <a href="#">programs</a>
+                </li>
+
+                <li>
+                  <a href="#" toggle-menu="true">
+                    resources <i className="bx bx-chevron-down"></i>
+                  </a>
+                  <ul role="list">
+                    <li>
+                      <a href="#" toggle-back="true">
+                        <i className="bx bx-chevron-left"></i>resources
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">citizen's charter</a>
+                    </li>
+                    <li>
+                      <a href="#">downloadables</a>
+                    </li>
+
+                    <li>
+                      <a href="#" toggle-menu="true">
+                        issuances <i className="bx bx-chevron-down"></i>
+                      </a>
+                      <ul role="list">
+                        <li>
+                          <a href="#" toggle-back="true">
+                            <i className="bx bx-chevron-left"></i>issuances
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#">draft issuances</a>
+                        </li>
+                        <li>
+                          <a href="#">joint circulars</a>
+                        </li>
+                        <li>
+                          <a href="#">memo circulars</a>
+                        </li>
+                        <li>
+                          <a href="#">presidential directives</a>
+                        </li>
+
+                        <li>
+                          <a href="#" toggle-menu="true">
+                            republic acts <i className="bx bx-chevron-down"></i>
+                          </a>
+                          <ul role="list">
+                            <li>
+                              <a href="#" toggle-back="true">
+                                <i className="bx bx-chevron-left"></i>republic
+                                acts
+                              </a>
+                            </li>
+
+                            <li>
+                              <a href="#">item 1</a>
+                            </li>
+                            <li>
+                              <a href="#">item 2</a>
+                            </li>
+                            <li>
+                              <a href="#">item 3 </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a href="#">dilg portals</a>
+                    </li>
+
+                    <li>
+                      <a href="#" toggle-menu="true">
+                        library <i className="bx bx-chevron-down"></i>
+                      </a>
+                      <ul role="list">
+                        <li>
+                          <a href="#" toggle-back="true">
+                            <i className="bx bx-chevron-left"></i>library
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#">central office</a>
+                        </li>
+                        <li>
+                          <a href="#">regional office</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <a href="#" toggle-menu="true">
+                    opportunities <i className="bx bx-chevron-down"></i>
+                  </a>
+                  <ul role="list">
+                    <li>
+                      <a href="#" toggle-back="true">
+                        <i className="bx bx-chevron-left"></i>opportunities
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">vacancies</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <a href="#">contact us</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 
-
 export default function App() {
-    return (<><HeaderNavigation/></>)
+  return (
+    <>
+      <HeaderNavigation />
+    </>
+  );
 }
