@@ -1,0 +1,43 @@
+@use '../../scss/abstracts/' as *;
+
+.toggle {
+    background: pink;
+    position: relative;
+    display: grid;
+    @include square(calc(var(--size-4) * 2));
+    @include show-element();
+    cursor: pointer;
+
+    @include breakpoint(tablet) {
+        @include hide-element();
+    }
+}
+
+.toggle > * {
+    position: absolute;
+    place-self: center;
+    transition: transform 300ms ease;
+}
+
+.toggle > *:first-child {
+    @include show-element();
+}
+
+.toggle > *:last-child {
+    @include hide-element();
+}
+
+.toggle[toggled] > *:first-child {
+    @include hide-element();
+}
+
+.toggle[toggled] > *:last-child {
+    @include show-element();
+}
+
+
+.toggle[toggled] + * {
+    transform: translateY(0);
+    @include show-element();
+}
+

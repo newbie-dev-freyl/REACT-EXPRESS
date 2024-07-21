@@ -1,0 +1,10 @@
+@use '../../scss/abstracts/' as *;
+
+.btn {
+    padding: 1rem;
+
+    @include breakpoint(tablet) {
+        padding: 1.5rem;
+    }
+}
+

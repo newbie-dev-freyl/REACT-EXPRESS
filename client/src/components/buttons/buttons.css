@@ -1,0 +1,9 @@
+.btn {
+  padding: 1rem;
+}
+
+@media screen and (min-width: 52.7em) {
+  .btn {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,8 @@
+@use '../abstracts/' as *;
+
+.wrapper {  
+    $max-width: map-get($breakpoints, tablet);
+    --max-width: #{$max-width};
+    width: min(100% - calc(var(--size-4) * 2), var(--max-width));
+    margin-inline: auto;
+}

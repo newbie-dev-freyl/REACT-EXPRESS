@@ -1,0 +1,30 @@
+@use '../../scss/abstracts/' as *;
+
+.brand-container {
+    background: palegreen;
+    position: relative;
+    @include flex-center-y(var(--size-1));
+    width: calc(var(--size-4) * 3);
+}
+
+.brand-container.hide-title {
+    @include grid-center();
+    @include square(calc(var(--size-4) * 3));
+    @include round();
+}
+
+.brand-container > * + *{
+    position: relative;
+    @include show-element();
+    
+}
+
+.brand-container.hide-title > * + *{
+    position: absolute;
+    @include hide-element();
+}
+
+.brand-container > *:first-child {
+    width: calc(var(--size-4) * 3);
+}
+

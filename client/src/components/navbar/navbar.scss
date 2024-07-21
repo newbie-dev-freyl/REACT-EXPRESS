@@ -1,0 +1,53 @@
+@use '../../scss/abstracts/' as *;
+
+.navbar {
+    background: pink;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    transform: translateY(2%);
+    @include hide-element();
+
+    transition: 300ms ease;
+
+    @include breakpoint(tablet) {
+        background: transparent;
+        position: relative;
+        width: auto;
+        height: auto;
+        transform: translateY(0);
+        @include show-element();
+    }
+}
+
+.navbar-menu {
+    position: relative;
+    font-family: var(--ff-nav);
+    text-transform: capitalize;
+    @include flex(var(--size-2));
+    flex-direction: column;
+
+    @include breakpoint(tablet) {
+        flex-direction: row;
+    }
+}
+
+.navbar-menu li > a + ul {
+    background: palegreen;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    @include hide-element();
+    transform: translateX(102%);
+    transition: transform 300ms ease;
+}
+
+.navbar-menu li > a + ul[menu-toggled] {
+    @include show-element();
+    transform: translateX(0);
+    transition: transform 300ms ease;
+    
+}

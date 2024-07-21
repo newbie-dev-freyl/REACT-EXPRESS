@@ -1,0 +1,16 @@
+@use '../abstracts/' as *;
+.flex {
+    @include flex()
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-sb {
+    justify-content: space-between;
+}

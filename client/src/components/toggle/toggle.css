@@ -1,0 +1,48 @@
+.toggle {
+  background: pink;
+  position: relative;
+  display: grid;
+  width: calc(var(--size-4) * 2);
+  height: calc(var(--size-4) * 2);
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+@media screen and (min-width: 52.7em) {
+  .toggle {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.toggle > * {
+  position: absolute;
+  place-self: center;
+  transition: transform 300ms ease;
+}
+
+.toggle > *:first-child {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toggle > *:last-child {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toggle[toggled] > *:first-child {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toggle[toggled] > *:last-child {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toggle[toggled] + * {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
